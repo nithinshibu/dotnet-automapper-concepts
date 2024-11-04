@@ -11,17 +11,6 @@ class Program
           .AddAutoMapper(typeof(Program)) // Registers AutoMapper and scans for profiles in the assembly
           .BuildServiceProvider();
 
-        //Method 1
-
-        var mapper = serviceProvider.GetRequiredService<IMapper>();
-
-        var source = new Source { Name = "John Doe" };
-        var destination = mapper.Map<Destination>(source);
-
-        Console.WriteLine($"Mapped Name: {destination.Name}");
-
-
-        //Method 2
 
         //Create and Populate the Employee Object i.e Source object (in real time , this might come from an API)
 
@@ -39,17 +28,18 @@ class Program
         // Way 1 : Specify the Destination Type and to the Map method pass the Source object
         //Now, employeeDTO1 object will have the same values as emp object
 
-        EmployeeDTO employeeDTO1 = _mapper.Map<EmployeeDTO>(emp);
+        //Here in this example the EmployeeDTO (destination class) has different property names from the Source class (Employee)
+        //So we will get Name and Department as empty initially unless we make some changes in the MapperConfig
 
 
-        //Way 2: Specify the both Source and Destination Type
-        //and to the Map metohd pass the Source object
-        //Now, employeeDTO2 object will have the same values as the emp object
+        //Automapper will map the properties automatically when the source and destination property names matches
 
-        EmployeeDTO employeeDTO2 = _mapper.Map<Employee,EmployeeDTO>(emp);
+        //When the properties names are different then we need to use the ForMember option in the automapper in the MapperConfig
 
-        Console.WriteLine("Name: " + employeeDTO1.Name);
-        Console.WriteLine("Deparment: " + employeeDTO2.Department);
+        EmployeeDTO employeeDTO1 = _mapper.Map<Employee, EmployeeDTO>(emp);
+
+        Console.WriteLine("Name: " + employeeDTO1.FullName);
+        Console.WriteLine("Deparment: " + employeeDTO1.Dept);
 
 
     }

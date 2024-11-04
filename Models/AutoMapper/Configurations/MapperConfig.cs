@@ -14,7 +14,12 @@ namespace AutoMapperInDotnet.Models.AutoMapper.Configurations
             //Provide all the Mapping Configuration
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Employee, EmployeeDTO>();
+                cfg.CreateMap<Employee, EmployeeDTO>()
+                //Provide Mapping Configuration of FullName and Name Property
+                .ForMember(dest => dest.FullName, act => act.MapFrom(src => src.Name))
+                //Provide Mapping Configuration of Department and Dept Property
+                .ForMember(dest => dest.Dept, act => act.MapFrom(src => src.Department));
+
                 //Any other mapping configuration
             });
 

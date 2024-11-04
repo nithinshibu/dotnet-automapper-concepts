@@ -1,4 +1,7 @@
-﻿Why do we need AutoMapper in C# ?
+﻿Youtube link: https://youtu.be/FQCyzNx2ElI?si=q9qnnD3Q129PpfC9
+
+
+Why do we need AutoMapper in C# ?
 
 Let us understand why we need Auto mapper in C# with an example.
 Let us say we have the following two classes Employee and EmployeeDTO.
