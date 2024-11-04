@@ -1,40 +1,56 @@
-﻿using AutoMapperInDotnet.Models;
+﻿using AutoMapper;
+using AutoMapperInDotnet.Models;
+using AutoMapperInDotnet.Models.AutoMapper.Configurations;
+using Microsoft.Extensions.DependencyInjection;
 
 class Program
 {
     static void Main()
     {
-        //Create and Populate Employee Object (TRADITIONAL WAY)
+        var serviceProvider = new ServiceCollection()
+          .AddAutoMapper(typeof(Program)) // Registers AutoMapper and scans for profiles in the assembly
+          .BuildServiceProvider();
 
-        //Switch between Git branches for automapper examples , master branch shows the traditional way example
+        //Method 1
+
+        var mapper = serviceProvider.GetRequiredService<IMapper>();
+
+        var source = new Source { Name = "John Doe" };
+        var destination = mapper.Map<Destination>(source);
+
+        Console.WriteLine($"Mapped Name: {destination.Name}");
+
+
+        //Method 2
+
+        //Create and Populate the Employee Object i.e Source object (in real time , this might come from an API)
 
         Employee emp = new Employee()
         {
-            Name="John",
-            Salary=20000,
-            Address="London",
-            Department="IT"
+            Name = "John",
+            Salary = 20000,
+            Address = "London",
+            Department = "IT"
         };
 
-        //Mapping Employee Object into the EmployeeDTO object
-      
-        EmployeeDTO empDTO = new EmployeeDTO()
-        {
-            Name = emp.Name,
-            Salary = emp.Salary,
-            Address = emp.Address,
-            Department = emp.Department
-        };
+        //Initialising the automapper
+        var _mapper = MapperConfig.InitialiseAutoMapper();
 
-        Console.WriteLine("Name: "+empDTO.Name);
-        Console.ReadLine();
+        // Way 1 : Specify the Destination Type and to the Map method pass the Source object
+        //Now, employeeDTO1 object will have the same values as emp object
 
-        //The main problem in this approach is that in future if any new properties are added in the main class "Employee" then we need to manually map all those 
-        //properties in to the EmployeeDTO class also which can be a hectic and futile task to do.
+        EmployeeDTO employeeDTO1 = _mapper.Map<EmployeeDTO>(emp);
 
-        //Another problem is that if we use the mapping in more than one place , then in each of those places we need to repeat this steps.
 
-        //In those case, if we use the automapper then this problem will be solved
+        //Way 2: Specify the both Source and Destination Type
+        //and to the Map metohd pass the Source object
+        //Now, employeeDTO2 object will have the same values as the emp object
+
+        EmployeeDTO employeeDTO2 = _mapper.Map<Employee,EmployeeDTO>(emp);
+
+        Console.WriteLine("Name: " + employeeDTO1.Name);
+        Console.WriteLine("Deparment: " + employeeDTO2.Department);
+
 
     }
 }

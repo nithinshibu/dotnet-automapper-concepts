@@ -1,0 +1,10 @@
+﻿What is AutoMapper in C# ?
+
+The AutoMapper in C# is a mapper between two objects. It is an Object-to-Object Mapper and it maps the properties of two different objects by transforming the input object of one type to the output object of another type.
+
+In Automapper , we will have  a Source Object (Ex: Employee Class) and a Destination Object (Ex: EmployeeDTO class).
+
+Automapper will map the properties from the source object to the destination object.
+
+Install the "AutoMapper" package from the nuget package manager.
+
