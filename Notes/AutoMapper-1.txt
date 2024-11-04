@@ -1,0 +1,53 @@
+﻿Why do we need AutoMapper in C# ?
+
+Let us understand why we need Auto mapper in C# with an example.
+Let us say we have the following two classes Employee and EmployeeDTO.
+First, create a class file with the name Employee.cs and
+then copy and paste the following code into it. This is a very simple class having 4 properties.
+namespace AutoMapperDemo
+{
+	public class Employee
+	{
+
+		public string Name {get; set; }
+		public int Salary {get; set; }
+		public string Address {get; set; }
+		public string Department {get; set;}
+
+	}
+}
+
+
+Next, create another class file with the name EmployeeDTO,— and then copy and paste the following
+code into it, This class is identical to the Employee class having 4 properties.
+namespace AutoMapperDemo
+{
+	public class EmployeeDTO
+	{
+
+		public string Name { get; set; }
+		public int Salary { get; set; }
+		public string Address { get; set; }
+		public string Department { get; set; }
+
+	}
+
+}
+
+Our business requirement is to copy the data or transfer the data from Employee object to the EmployeeDTO object.
+
+In the traditional approach (without the AutoMapper) , first we need to create and populate the Employee object.
+
+Project 1 : Presentation Layer (Web,iOS etc)
+
+Project 2 : API / (Business Logic)
+
+Project 3: Data Access Layer (database)
+
+
+Suppose from DAL to Proj2 (BAL) we are returning a class with 10 property and in the API we need the 10 property to do some operations but the API response should contain only 5 or 7 properties from the main model class.
+
+It is hectic to manually copy values as in the traditional way and there comes the use case of Automapper.
+
+
+
