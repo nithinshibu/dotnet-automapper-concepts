@@ -16,15 +16,16 @@ namespace AutoMapperInDotnet.Models.AutoMapper.Configurations
             //Provide all the Mapping Configuration
             var config = new MapperConfiguration(cfg =>
             {
-
-                cfg.CreateMap<Employee, EmployeeDTO>()
-                .ForMember(dest => dest.FullName, act => act.MapFrom(src => src.Name))
-                .ForMember(dest => dest.Address, act => act.MapFrom(src => new Address()
-                {
-                    City = src.City,
-                    State = src.State,
-                    Country = src.Country
-                }));
+                //Mapping Order with OrderDTO
+                cfg.CreateMap<Order, OrderDTO>()
+                //OrderId is different so map them using ForMember
+                .ForMember(dest => dest.OrderId, act => act.MapFrom(src => src.OrderNo))
+                //Customer is a Complex type, so map Customer to Simple type using ForMember
+                .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Customer.FullName))
+                .ForMember(dest => dest.PostCode, act => act.MapFrom(src => src.Customer.PostCode))
+                .ForMember(dest => dest.MobileNo, act => act.MapFrom(src => src.Customer.ContactNo))
+                .ForMember(dest => dest.CustomerId, act => act.MapFrom(src => src.Customer.CustomerID))
+                .ReverseMap();//Making the mapping Bi-directional
 
                 //Any other mapping configuration
             });
