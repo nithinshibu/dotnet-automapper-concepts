@@ -1,0 +1,4 @@
+﻿What is AutoMapper Complex Mapping / Nested Mapping ?
+
+When both types (Source and Destination) involved in the mapping contain properties of the complex type then in such scenarios we need to use the AutoMapper Complex Mapping in C#.
+

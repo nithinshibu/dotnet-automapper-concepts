@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using AutoMapperInDotnet.Models;
+using AutoMapperInDotnet.Models.Destination;
+using AutoMapperInDotnet.Models.Source;
 using AutoMapperInDotnet.Models.AutoMapper.Configurations;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,28 +19,24 @@ class Program
         {
             Name = "John",
             Salary = 20000,
-            Address = "London",
+            //Creating an instance of Address Entity
+            Address = new Address() { City= "London" ,Country="UK",State="England"},
             Department = "IT"
         };
 
         //Initialising the automapper
         var _mapper = MapperConfig.InitialiseAutoMapper();
 
-        // Way 1 : Specify the Destination Type and to the Map method pass the Source object
-        //Now, employeeDTO1 object will have the same values as emp object
-
-        //Here in this example the EmployeeDTO (destination class) has different property names from the Source class (Employee)
-        //So we will get Name and Department as empty initially unless we make some changes in the MapperConfig
-
-
-        //Automapper will map the properties automatically when the source and destination property names matches
-
-        //When the properties names are different then we need to use the ForMember option in the automapper in the MapperConfig
-
+      
         EmployeeDTO employeeDTO1 = _mapper.Map<Employee, EmployeeDTO>(emp);
 
-        Console.WriteLine("Name: " + employeeDTO1.FullName);
-        Console.WriteLine("Deparment: " + employeeDTO1.Dept);
+        //Without making necessary changes in the AutoMapper configuration 
+        //an error will be thrown
+        //"Missing type map configuration or unsupported mapping"
+
+        Console.WriteLine("Name: " + employeeDTO1.Name);
+        Console.WriteLine("Deparment: " + employeeDTO1.Department);
+        Console.WriteLine("Country: " + employeeDTO1.Address.Country);
 
 
     }

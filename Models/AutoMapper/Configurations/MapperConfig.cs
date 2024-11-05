@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using AutoMapperInDotnet.Models.Destination;
+using AutoMapperInDotnet.Models.Source;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +16,10 @@ namespace AutoMapperInDotnet.Models.AutoMapper.Configurations
             //Provide all the Mapping Configuration
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Employee, EmployeeDTO>()
-                //Provide Mapping Configuration of FullName and Name Property
-                .ForMember(dest => dest.FullName, act => act.MapFrom(src => src.Name))
-                //Provide Mapping Configuration of Department and Dept Property
-                .ForMember(dest => dest.Dept, act => act.MapFrom(src => src.Department));
+                cfg.CreateMap<Employee, EmployeeDTO>();
+                //To fix the error "Missing type map configuration or unsupported mapping" 
+                // we need to map Address with AddressDTO
+                cfg.CreateMap<Address, AddressDTO>();
 
                 //Any other mapping configuration
             });

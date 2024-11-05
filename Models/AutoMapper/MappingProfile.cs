@@ -11,8 +11,8 @@ namespace AutoMapperInDotnet.Models.AutoMapper
     {
         public MappingProfile()
         {
-            CreateMap<Source, Destination>();
-            CreateMap<Employee, EmployeeDTO>();
+            //CreateMap<Source, Destination>();
+            //CreateMap<Employee, EmployeeDTO>();
         }
     }
 
