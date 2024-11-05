@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapperInDotnet.Models.AutoMapper.IgnoreMultiple.IgnoreNoMapExtension;
 using AutoMapperInDotnet.Models.Destination;
 using AutoMapperInDotnet.Models.Source;
 using System;
@@ -16,10 +17,8 @@ namespace AutoMapperInDotnet.Models.AutoMapper.Configurations
             //Provide all the Mapping Configuration
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Employee, EmployeeDTO>()
-                //Ignoring the Address Property of the destination type
-                .ForMember(dest => dest.Address, act => act.Ignore());
-                
+                cfg.CreateMap<Employee, EmployeeDTO>().IgnoreNoMap();
+
 
                 //Any other mapping configuration
             });
