@@ -30,16 +30,11 @@ class Program
       
         EmployeeDTO employeeDTO1 = _mapper.Map<Employee, EmployeeDTO>(emp);
 
-        //Without making necessary changes in the AutoMapper configuration 
-        //an error will be thrown
-        //"Missing type map configuration or unsupported mapping"
 
         Console.WriteLine("Name: " + employeeDTO1.Name);
         Console.WriteLine("Deparment: " + employeeDTO1.Department);
-        //So in the EmployeeDTO I changed the property name to "AddressDTO"
-        //We will get a object reference null error
-        Console.WriteLine("Country: " + employeeDTO1.AddressDTO.Country);
-        Console.WriteLine("Employee State: " + employeeDTO1.AddressDTO.EmpState);
+        Console.WriteLine("Country: " + employeeDTO1.Country);
+        Console.WriteLine("Employee State: " + employeeDTO1.State);
 
 
     }
