@@ -8,33 +8,27 @@ class Program
 {
     static void Main()
     {
-        var serviceProvider = new ServiceCollection()
-          .AddAutoMapper(typeof(Program)) // Registers AutoMapper and scans for profiles in the assembly
-          .BuildServiceProvider();
-
-
-        //Create and Populate the Employee Object i.e Source object (in real time , this might come from an API)
-
-        Employee emp = new Employee()
-        {
-            Name = "John",
-            Salary = 20000,
-            //Creating an instance of Address Entity
-            Address = new Address() { City= "London" ,Country="UK",State="England"},
-            Department = "IT"
-        };
+       
 
         //Initialising the automapper
         var _mapper = MapperConfig.InitialiseAutoMapper();
 
-      
-        EmployeeDTO employeeDTO1 = _mapper.Map<Employee, EmployeeDTO>(emp);
 
-
-        Console.WriteLine("Name: " + employeeDTO1.Name);
-        Console.WriteLine("Deparment: " + employeeDTO1.Department);
-        Console.WriteLine("Country: " + employeeDTO1.Country);
-        Console.WriteLine("Employee State: " + employeeDTO1.State);
+        PermanentAddress permAddress = new PermanentAddress()
+        {
+            Name = "Pranaya",
+            Address = null,
+            CreatedBy = "Dot Net Tutorials",
+            CreatedOn = DateTime.Now
+        };
+        var TempAddress = _mapper.Map<PermanentAddress, TemporaryAddress>(permAddress);
+        Console.WriteLine("After Mapping Permanent Address");
+        //Here CreatedBy and CreatedOn will be empty for Permanent Address
+        Console.WriteLine($"Name: {permAddress.Name}, Address: {permAddress.Address}, CreatedBy: {permAddress.CreatedBy}, CreatedOn: {permAddress.CreatedOn}");
+        Console.WriteLine("After Mapping Permanent Address");
+        //Here CreatedBy with Fixed Valye and CreatedOn with Dynamic Value
+        Console.WriteLine($"Name: {TempAddress.Name}, Address: {TempAddress.Address}, CreatedBy: {TempAddress.CreatedBy}, CreatedOn: {TempAddress.CreatedOn}");
+        Console.ReadLine();
 
 
     }
