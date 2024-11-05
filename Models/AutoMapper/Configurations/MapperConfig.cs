@@ -20,7 +20,9 @@ namespace AutoMapperInDotnet.Models.AutoMapper.Configurations
                 cfg.CreateMap<Employee, EmployeeDTO>().ForMember(dest=>dest.AddressDTO,act=>act.MapFrom(src=>src.Address));
                 //To fix the error "Missing type map configuration or unsupported mapping" 
                 // we need to map Address with AddressDTO
-                cfg.CreateMap<Address, AddressDTO>();
+                cfg.CreateMap<Address, AddressDTO>()
+                .ForMember(dest=>dest.EmpState,act=>act.MapFrom(src=>src.State))
+                .ForMember(dest => dest.EmpCity, act => act.MapFrom(src => src.City));
 
                 //Any other mapping configuration
             });

@@ -39,6 +39,7 @@ class Program
         //So in the EmployeeDTO I changed the property name to "AddressDTO"
         //We will get a object reference null error
         Console.WriteLine("Country: " + employeeDTO1.AddressDTO.Country);
+        Console.WriteLine("Employee State: " + employeeDTO1.AddressDTO.EmpState);
 
 
     }
