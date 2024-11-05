@@ -12,34 +12,28 @@ class Program
         //Initialising the automapper
         var _mapper = MapperConfig.InitialiseAutoMapper();
 
-        Product product = new Product()
+        //Creating the source object
+
+        Employee employee = new Employee()
         {
-            ProductID = 101,
-            Name= "Led TV",
-            OptionalName="Product Name not start with A",
-            Quantity=-5,
-            Amount=1000
+            ID=101,
+            Name="James",
+            Address="Mumbai",
+            Email="info@samplemail.com"
         };
 
-        var productDTO = _mapper.Map<Product,ProductDTO>(product);
+        //Mapping the source Employee Object with the Destination EmployeeDTO object
+        var empDTO = _mapper.Map<Employee, EmployeeDTO>(employee);
 
 
-
-        Console.WriteLine("Before Mapping : Product Object");
-        Console.WriteLine("ProductID : " + product.ProductID);
-        Console.WriteLine("Name : " + product.Name);
-        Console.WriteLine("OptionalName : " + product.OptionalName);
-        Console.WriteLine("Quantity : " + product.Quantity);
-        Console.WriteLine("Amount : " + product.Amount);
+        //Printing the Employee Object
+        Console.WriteLine("After Mapping : Employee Object");
+        Console.WriteLine("ID : " + employee.ID + ", Name : " + employee.Name + ", Address : " + employee.Address + ", Email : " + employee.Email);
         Console.WriteLine();
-
-        Console.WriteLine("After Mapping : ProductDTO Object");
-        Console.WriteLine("ProductID : " + productDTO.ProductID);
-        Console.WriteLine("ItemName : " + productDTO.ItemName);
-        Console.WriteLine("ItemQuantity : " + productDTO.ItemQuantity);
-        Console.WriteLine("Amount : " + productDTO.Amount);
+        //Printing the EmployeeDTO Object
+        Console.WriteLine("After Mapping : EmployeeDTO Object");
+        Console.WriteLine("ID : " + empDTO.ID + ", Name : " + empDTO.Name + ", Address : " + empDTO.Address + ", Email : " + empDTO.Email);
         Console.ReadLine();
-
 
     }
 
