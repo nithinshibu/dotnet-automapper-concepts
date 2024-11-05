@@ -17,15 +17,24 @@ namespace AutoMapperInDotnet.Models.AutoMapper.Configurations
             var config = new MapperConfiguration(cfg =>
             {
                 //Mapping Order with OrderDTO
+                //Source will be Order and Destination will be OrderDTO
                 cfg.CreateMap<Order, OrderDTO>()
-                //OrderId is different so map them using ForMember
+                
                 .ForMember(dest => dest.OrderId, act => act.MapFrom(src => src.OrderNo))
-                //Customer is a Complex type, so map Customer to Simple type using ForMember
-                .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Customer.FullName))
-                .ForMember(dest => dest.PostCode, act => act.MapFrom(src => src.Customer.PostCode))
-                .ForMember(dest => dest.MobileNo, act => act.MapFrom(src => src.Customer.ContactNo))
+                .ForMember(dest => dest.Customer, act => act.MapFrom(src => new Customer()
+                {
+                    CustomerID=src.CustomerId,
+                    FullName=src.Name,
+                    PostCode=src.PostCode,
+                    ContactNo=src.MobileNo
+                }))
+                .ReverseMap()
+                //After this line , the source will be OrderDTO and the destination will be Order
                 .ForMember(dest => dest.CustomerId, act => act.MapFrom(src => src.Customer.CustomerID))
-                .ReverseMap();//Making the mapping Bi-directional
+                .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Customer.FullName))
+                .ForMember(dest => dest.MobileNo, act => act.MapFrom(src => src.Customer.ContactNo))
+                .ForMember(dest => dest.PostCode, act => act.MapFrom(src => src.Customer.PostCode))
+                ;//Making the mapping Bi-directional
 
                 //Any other mapping configuration
             });

@@ -32,10 +32,10 @@ class Program
         Console.WriteLine("OrderId :"+orderDTOData.OrderId);
         Console.WriteLine("NumberOfItems :" + orderDTOData.NumberOfItems);
         Console.WriteLine("TotalAmount :" + orderDTOData.TotalAmount);
-        Console.WriteLine("CustomerId :" + orderDTOData.CustomerId);
-        Console.WriteLine("Name :" + orderDTOData.Name);
-        Console.WriteLine("PostCode :" + orderDTOData.PostCode);
-        Console.WriteLine("MobileNo :" + orderDTOData.MobileNo);
+        Console.WriteLine("CustomerId :" + orderDTOData.Customer.CustomerID);
+        Console.WriteLine("Name :" + orderDTOData.Customer.FullName);
+        Console.WriteLine("PostCode :" + orderDTOData.Customer.PostCode);
+        Console.WriteLine("MobileNo :" + orderDTOData.Customer.ContactNo);
         Console.WriteLine();
 
 
@@ -43,9 +43,14 @@ class Program
         orderDTOData.OrderId = 10;
         orderDTOData.NumberOfItems = 20;
         orderDTOData.TotalAmount = 2000;
-        orderDTOData.CustomerId = 5;
-        orderDTOData.Name = "William";
-        orderDTOData.PostCode = "12345";
+        orderDTOData.Customer = new Customer()
+        {
+            CustomerID = 50,
+            FullName= "John Wick",
+            PostCode="12345",
+            ContactNo="0011220056"
+
+        };
 
         //AutoMapper Reverse Mapping - _mapper.Map(source, destination);
 
@@ -58,10 +63,10 @@ class Program
         Console.WriteLine("OrderId :" + OrderRequest.OrderNo);
         Console.WriteLine("NumberOfItems :" + OrderRequest.NumberOfItems);
         Console.WriteLine("TotalAmount :" + OrderRequest.TotalAmount);
-        Console.WriteLine("CustomerId :" + OrderRequest.Customer.CustomerID);
-        Console.WriteLine("Name :" + OrderRequest.Customer.FullName);
-        Console.WriteLine("PostCode :" + OrderRequest.Customer.PostCode);
-        Console.WriteLine("MobileNo :" + OrderRequest.Customer.ContactNo);
+        Console.WriteLine("CustomerId :" + OrderRequest.CustomerId);
+        Console.WriteLine("Name :" + OrderRequest.Name);
+        Console.WriteLine("PostCode :" + OrderRequest.PostCode);
+        Console.WriteLine("MobileNo :" + OrderRequest.MobileNo);
         Console.WriteLine();
 
 
@@ -74,13 +79,10 @@ class Program
             OrderNo = 101,
             NumberOfItems = 3,
             TotalAmount = 1000,
-            Customer = new Customer()
-            {
-                CustomerID = 777,
-                FullName = "James Smith",
-                PostCode = "755019",
-                ContactNo = "1234567890"
-            }
+            CustomerId = 777,
+            Name = "James Smith",
+            PostCode = "755019",
+            MobileNo = "1234567890"
         };
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapperInDotnet.Models.Source;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,11 +12,6 @@ namespace AutoMapperInDotnet.Models.Destination
         public int OrderId { get; set; }
         public int NumberOfItems { get; set; }
         public int TotalAmount { get; set; }
-
-        public int CustomerId { get; set; }
-        public string Name { get; set; }
-
-        public string PostCode { get; set; }
-        public string MobileNo { get; set; }
+        public Customer Customer { get; set; }
     }
 }
