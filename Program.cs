@@ -36,7 +36,9 @@ class Program
 
         Console.WriteLine("Name: " + employeeDTO1.Name);
         Console.WriteLine("Deparment: " + employeeDTO1.Department);
-        Console.WriteLine("Country: " + employeeDTO1.Address.Country);
+        //So in the EmployeeDTO I changed the property name to "AddressDTO"
+        //We will get a object reference null error
+        Console.WriteLine("Country: " + employeeDTO1.AddressDTO.Country);
 
 
     }

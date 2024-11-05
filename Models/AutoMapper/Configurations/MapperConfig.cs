@@ -16,7 +16,8 @@ namespace AutoMapperInDotnet.Models.AutoMapper.Configurations
             //Provide all the Mapping Configuration
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Employee, EmployeeDTO>();
+                //When we add the ForMember the null reference error will be resolved for the different property names 
+                cfg.CreateMap<Employee, EmployeeDTO>().ForMember(dest=>dest.AddressDTO,act=>act.MapFrom(src=>src.Address));
                 //To fix the error "Missing type map configuration or unsupported mapping" 
                 // we need to map Address with AddressDTO
                 cfg.CreateMap<Address, AddressDTO>();
