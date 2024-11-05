@@ -19,8 +19,9 @@ class Program
         {
             Name = "John",
             Salary = 20000,
-            //Creating an instance of Address Entity
-            Address = new Address() { City= "London" ,Country="UK",State="England"},
+            City= "London" ,
+            Country="UK",
+            State="England",
             Department = "IT"
         };
 
@@ -31,10 +32,10 @@ class Program
         EmployeeDTO employeeDTO1 = _mapper.Map<Employee, EmployeeDTO>(emp);
 
 
-        Console.WriteLine("Name: " + employeeDTO1.Name);
+        Console.WriteLine("Name: " + employeeDTO1.FullName);
         Console.WriteLine("Deparment: " + employeeDTO1.Department);
-        Console.WriteLine("Country: " + employeeDTO1.Country);
-        Console.WriteLine("Employee State: " + employeeDTO1.State);
+        Console.WriteLine("Country: " + employeeDTO1.Address.Country);
+        Console.WriteLine("Employee State: " + employeeDTO1.Address.State);
 
 
     }

@@ -16,12 +16,15 @@ namespace AutoMapperInDotnet.Models.AutoMapper.Configurations
             //Provide all the Mapping Configuration
             var config = new MapperConfiguration(cfg =>
             {
-               
+
                 cfg.CreateMap<Employee, EmployeeDTO>()
-                .ForMember(dest=>dest.City,act=>act.MapFrom(src=>src.Address.City))
-                .ForMember(dest=>dest.State,act=>act.MapFrom(src=>src.Address.State))
-                .ForMember(dest=>dest.Country,act=>act.MapFrom(src=>src.Address.Country));
-                
+                .ForMember(dest => dest.FullName, act => act.MapFrom(src => src.Name))
+                .ForMember(dest => dest.Address, act => act.MapFrom(src => new Address()
+                {
+                    City = src.City,
+                    State = src.State,
+                    Country = src.Country
+                }));
 
                 //Any other mapping configuration
             });
